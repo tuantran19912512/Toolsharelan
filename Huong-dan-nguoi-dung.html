@@ -50,7 +50,7 @@ code{background:var(--paper);border-radius:4px;padding:.1em .25em;overflow-wrap:
   <a href="#may-chu">1. Khởi tạo</a><a href="#thu-muc">2. Thêm thư mục</a>
   <a href="#dang-ky">3. Đăng ký máy con</a><a href="#trien-khai">4. Triển khai</a>
   <a href="#bo-phan">5. Bộ phận</a><a href="#vi-du-bo-phan">Ví dụ triển khai theo bộ phận</a>
-  <a href="#may-in">6. Máy in</a><a href="#doi-mang">7. Khi đổi mạng</a><a href="#cap-nhat">8. Cập nhật tool</a><a href="#loi">Khi gặp lỗi</a>
+  <a href="#may-in">6. Máy in</a><a href="#doi-mang">7. Khi đổi mạng</a><a href="#cap-nhat">8. Cập nhật tool</a><a href="#tra-cuu-nut">9. Tra cứu từng nút</a><a href="#loi">Khi gặp lỗi</a>
 </nav>
 <section id="may-chu">
   <h2>1. Khởi tạo máy chủ</h2>
@@ -175,6 +175,68 @@ code{background:var(--paper);border-radius:4px;padding:.1em .25em;overflow-wrap:
     <li>Tool tự mở lại sau khi cài. Danh sách máy con và cấu hình được giữ nguyên. Bấm <b>Khởi tạo máy chủ</b> nếu muốn tiếp tục nhận kết nối.</li>
   </ol>
   <p>Nếu bản mới có sửa phần máy con, xuất và chạy lại file đăng ký trên các máy cần cập nhật. Nếu bản cũ chưa có nút kiểm tra cập nhật, tải bản mới thủ công một lần.</p>
+</section>
+<section id="tra-cuu-nut">
+  <h2>9. Tra cứu từng nút</h2>
+  <p>Không chắc nên bấm nút nào? Xem <a href="#anh-may-chu">ảnh giao diện máy chủ</a> để tìm vị trí, hoặc rê chuột lên nút để xem lời nhắc ngay trong tool.</p>
+  <h3>Nhóm 1 — Thiết lập máy chủ</h3>
+  <table aria-label="Các nút thiết lập máy chủ">
+    <thead><tr><th scope="col">Nút hoặc mục menu</th><th scope="col">Bấm khi nào?</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Khởi tạo máy chủ</th><td>Mở bộ nhận kết nối. Chọn đúng IP, bấm nút và chờ thanh xanh <b>Sẵn sàng</b>.</td></tr>
+      <tr><th scope="row">Tạo file đăng ký</th><td>Khi cần cho máy mới tham gia hoặc gửi lại gói đã cập nhật. Chọn <b>Windows (.cmd)</b> cho máy Windows; chọn <b>macOS (.zip)</b> cho Mac (chỉ chia sẻ thư mục).</td></tr>
+      <tr><th scope="row">Quản lý bộ phận</th><td>Tạo hoặc sửa bộ phận như Kế toán, Văn phòng. Bấm <b>Lưu bộ phận</b> để lưu hoặc <b>Hủy</b> để bỏ thay đổi trong cửa sổ.</td></tr>
+      <tr><th scope="row">Sao lưu / Phục hồi</th><td>Mở menu sao lưu, đổi IP và kiểm tra bản mới. Xem từng mục ở bảng bên dưới.</td></tr>
+      <tr><th scope="row">Bảo trì / Khôi phục mạng…</th><td>Mở các nút bảo trì. Không cần dùng trong quy trình triển khai bình thường.</td></tr>
+    </tbody>
+  </table>
+  <h3>Nhóm 2 — Tài nguyên chia sẻ</h3>
+  <table aria-label="Các nút tài nguyên chia sẻ">
+    <thead><tr><th scope="col">Nút</th><th scope="col">Bấm khi nào?</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Thêm thư mục / ổ đĩa</th><td>Chọn thư mục trên máy chủ và đặt tên chia sẻ. Muốn máy con nhận thư mục, tick dòng đó rồi triển khai.</td></tr>
+      <tr><th scope="row">Chọn máy in</th><td>Thêm máy in đã cài trên máy chủ vào danh sách. Tick máy in trước khi xuất gói Windows nếu muốn kèm driver.</td></tr>
+      <tr><th scope="row">Nạp share có sẵn</th><td>Đưa thư mục hoặc máy in Windows đã chia sẻ vào danh sách. Công cụ để <b>Keep</b> để giữ quyền hiện có; tick những mục bạn thực sự muốn triển khai.</td></tr>
+      <tr><th scope="row">Quyền bộ phận</th><td>Bấm vào đúng một dòng tài nguyên, rồi chọn bộ phận nào được dùng. <b>Lưu quyền</b> chỉ lưu lựa chọn; bấm <b>Triển khai đã chọn</b> để áp dụng.</td></tr>
+      <tr><th scope="row">Tắt share và bỏ</th><td>Ngừng chia sẻ tài nguyên đã chọn trên Windows và bỏ khỏi danh sách. <b>Không xóa thư mục gốc</b>, nhưng máy đang dùng tài nguyên có thể mất kết nối.</td></tr>
+    </tbody>
+  </table>
+  <h3>Nhóm 3 — Máy con và triển khai</h3>
+  <table aria-label="Các nút máy con và triển khai">
+    <thead><tr><th scope="col">Nút</th><th scope="col">Bấm khi nào?</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Chọn tất cả</th><td>Tick toàn bộ máy trong bảng, kể cả máy <b>Offline</b>. Nếu chỉ triển khai cho vài máy, tick riêng từng máy.</td></tr>
+      <tr><th scope="row">Gán bộ phận</th><td>Tick các máy cùng bộ phận rồi chọn tên nhóm. Chọn <b>Chung</b> nếu không gán máy vào bộ phận riêng.</td></tr>
+      <tr><th scope="row">Lưu báo cáo</th><td>Lưu thông tin tài nguyên chia sẻ và kết quả triển khai. Chọn <b>HTML</b> để mở và đọc bằng trình duyệt.</td></tr>
+      <tr><th scope="row">Xóa máy đã chọn</th><td>Bỏ đăng ký máy đã tick. Muốn cho máy đó tham gia lại, chạy file đăng ký mới. Nút này không dùng để xóa thư mục hoặc máy in chia sẻ.</td></tr>
+      <tr><th scope="row">Xem tiến trình</th><td>Chọn một dòng máy để xem máy nhận được gì hoặc lỗi ở đâu. Có thể nhấp đúp dòng máy; <b>Lưu TXT</b> để gửi chi tiết cho người hỗ trợ.</td></tr>
+      <tr><th scope="row">Triển khai đã chọn</th><td>Gửi tài nguyên ở bảng trên cho máy đã tick ở bảng dưới. Nếu dùng bộ phận, mỗi máy chỉ nhận tài nguyên được cấp. Máy Offline có thể nhận lệnh khi kết nối lại và máy chủ đang mở.</td></tr>
+    </tbody>
+  </table>
+  <h3>Menu sao lưu và bảo trì</h3>
+  <table aria-label="Các nút trong menu sao lưu và bảo trì">
+    <thead><tr><th scope="col">Nút hoặc mục menu</th><th scope="col">Bấm khi nào?</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Sao lưu cấu hình có mật khẩu…</th><td>Lưu cấu hình LAN Share trước khi thay đổi lớn hoặc cập nhật. Không dùng nút này để sao lưu tài liệu trong thư mục chia sẻ.</td></tr>
+      <tr><th scope="row">Khôi phục bản sao lưu…</th><td>Nạp lại cấu hình đã lưu. Đóng rồi mở lại tool và thực hiện <b>trước khi</b> bấm Khởi tạo. Thao tác này thay cấu hình hiện tại.</td></tr>
+      <tr><th scope="row">Cập nhật IP máy chủ / tạo lại gói đăng ký…</th><td>Dùng khi máy chủ đổi IP. Chọn IP mới, <b>Khởi tạo máy chủ</b> lại, rồi xuất gói mới nếu máy con chưa kết nối được.</td></tr>
+      <tr><th scope="row">Kiểm tra cập nhật GitHub…</th><td>Kiểm tra có bản mới không. Chỉ tải và cài khi bạn xác nhận.</td></tr>
+      <tr><th scope="row">Khôi phục mạng</th><td>Khi ngừng dùng tool, hoàn lại cài đặt mạng và tường lửa trước đây. Bộ nhận đăng ký sẽ dừng.</td></tr>
+      <tr><th scope="row">Hoàn tác SID tạm</th><td>Chỉ dùng khi người hỗ trợ yêu cầu gỡ bản sửa tạm của tool. Có thể cần khởi động lại Windows.</td></tr>
+      <tr><th scope="row">Khởi động lại máy chủ</th><td>Chỉ dùng khi đã lưu công việc và có thể tạm ngắt truy cập. Nút này khởi động lại <b>cả Windows</b>, không chỉ mở lại tool.</td></tr>
+    </tbody>
+  </table>
+  <h3>Cửa sổ hiện thêm khi làm việc</h3>
+  <table aria-label="Các nút trong cửa sổ máy mới và tiến trình">
+    <thead><tr><th scope="col">Nút</th><th scope="col">Bấm khi nào?</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Dùng rule máy mẫu</th><td>Khi máy mới cần nhận bộ tài nguyên giống máy cũ đã triển khai thành công. Hãy chọn đúng máy mẫu. Nếu chỉ thêm máy mới, đừng tick ô <b>Máy này thay cho máy mẫu…</b>.</td></tr>
+      <tr><th scope="row">Dùng rule từ máy khác…</th><td>Trong menu chuột phải của bảng máy con, dùng cấu hình từ một máy khác đã triển khai thành công.</td></tr>
+      <tr><th scope="row">Cấu hình mới / Để sau</th><td><b>Cấu hình mới</b> để chọn tài nguyên cho máy vừa đăng ký; <b>Để sau</b> nếu chưa muốn triển khai.</td></tr>
+      <tr><th scope="row">Mở kết quả TXT / Mở chẩn đoán driver</th><td>Trên máy con, xem kết quả chi tiết hoặc thông tin lỗi driver để gửi người hỗ trợ. Nút có thể chưa bật nếu chưa có báo cáo.</td></tr>
+      <tr><th scope="row">Đóng</th><td>Đóng cửa sổ tiến trình trên máy con chỉ ẩn cửa sổ, <b>không hủy triển khai</b>.</td></tr>
+    </tbody>
+  </table>
 </section>
 <section id="loi">
   <h2>Khi gặp lỗi</h2>
