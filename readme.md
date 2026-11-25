@@ -19,6 +19,7 @@ Bộ công cụ triển khai **tập trung thư mục / ổ đĩa dùng chung v�
 | Tiến trình & báo cáo | Xem tiến trình theo từng máy (host) và cửa sổ tiến trình trên máy con; xuất báo cáo **HTML** (đọc/in) hoặc **JSON** (đối chiếu) gồm trạng thái Windows thực tế, cấu hình, bộ phận, máy con, lịch sử triển khai (đã ẩn mật khẩu). |
 | Sao lưu / phục hồi | File `.lanbackup` mã hóa AES bằng mật khẩu (≥10 ký tự, PBKDF2 150.000 vòng).Khôi phục trước khi khởi tạo lại; tự hủy các lệnh Pending/Running cũ. Cập nhật IP / tạo lại gói đăng ký khi đổi mạng. |
 | Bảo trì | Khôi phục mạng/firewall, hoàn tác bản sửa SID tạm, khởi động lại máy chủ. |
+| Cập nhật | Máy chủ tự kiểm tra GitHub khi mở tool. Chỉ tải và cài khi người dùng xác nhận; giữ dữ liệu máy chủ. |
 | Tương thích | Host: Windows 10/11 (PowerShell 5.1). Client Windows 10/11 đầy đủ tính năng; **Windows 7 SP1 + WMF 5.1 + .NET 4.6.2+** dùng bộ adapter legacy. Client **macOS** (Python 3.10+): nhận thư mục SMB trong Finder, chưa hỗ trợ máy in Windows. |
 | Xử lý SID trùng | Tự đối chiếu machine SID và sự kiện `LsaSrv 6167`, áp bản sửa tạm (Registry override `1517186191`) trên Windows 11 build 26100/26200, kèm nút hoàn tác. |
 
@@ -42,6 +43,7 @@ Tool_Share_LAN/
     ├── Printer-Helper.ps1    # Worker SYSTEM chuẩn bị driver máy in (Scheduled Task)
     ├── Driver-Packages.ps1   # Xuất/gói/ký driver INF; cài driver bằng package API
     ├── Print-Preferences.ps1 # Chuẩn bị các tùy chọn in trên máy con Windows 11
+    ├── Update.ps1            # Kiểm tra, xác minh và cài bản phát hành GitHub
     ├── Departments.ps1       # Logic bộ phận & phân quyền share/NTFS/printer
     ├── Departments-UI.ps1    # 3 dialog: quản lý bộ phận, quyền bộ phận, gán bộ phận
     ├── New-Clients.ps1       # Dùng lại rule từ máy đã triển khai thành công
@@ -144,6 +146,12 @@ Tool_Share_LAN/
 - `May-chu.ps1` có chế độ `-ValidateOnly [-PreviewPath]` để kiểm tra giao diện (dùng cho phát triển/kiểm thử).
 - Các script builder nhúng mã nguồn vào gói đăng ký dưới dạng JSON → GZip → Base64, bootstrap nằm trong file `.cmd` với ký tự `:LANSHARE_PAYLOAD` (giới hạn 8191 ký tự cho dòng lệnh CMD).
 - Client build hiện tại: `2026.11.25-printer-07`. Máy con đã đăng ký cần chạy gói Windows `.cmd` mới để cập nhật.
+
+## 9. Cập nhật qua GitHub
+
+- **Người dùng:** Mở LAN Share trên máy chủ; tool tự kiểm tra bản mới. Hoặc bấm **Sao lưu / Phục hồi → Kiểm tra cập nhật GitHub...**. Nếu có bản mới, xác nhận để cài rồi mở lại tool. Khởi tạo máy chủ nếu cần tiếp tục nhận kết nối. Không cài trong lúc đang triển khai máy con. Cấu hình và danh sách máy con trong `%ProgramData%\ToolShareLAN\Host` không bị thay đổi.
+- Người đang dùng bản cũ chưa có chức năng cập nhật cần tải bản có chức năng này về **một lần**. Nếu bản phát hành có thay đổi cho chương trình máy con, xuất và chạy lại file đăng ký mới trên các máy cần cập nhật.
+- **Người phát hành:** Tăng số trong `version.txt`, ví dụ `0.8.0`. Đóng thư mục tool thành `Tool_Share_LAN.zip` (có thể để một thư mục `Tool_Share_LAN` bao ngoài). Tạo [GitHub Release](https://github.com/tuantran19912512/Toolsharelan/releases) chính thức với tag `v0.8.0`, đính kèm ZIP và phát hành. Không dùng ZIP `Source code` tự sinh hoặc chỉ cập nhật nhánh `main`. Không đưa gói đăng ký đã xuất, dữ liệu nội bộ hay bản sao lưu vào ZIP. Updater xác minh SHA-256 từ GitHub và kiểm tra phiên bản trong ZIP khớp tag.
 
 ---
 

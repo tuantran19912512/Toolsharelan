@@ -50,7 +50,7 @@ code{background:var(--paper);border-radius:4px;padding:.1em .25em;overflow-wrap:
   <a href="#may-chu">1. Khởi tạo</a><a href="#thu-muc">2. Thêm thư mục</a>
   <a href="#dang-ky">3. Đăng ký máy con</a><a href="#trien-khai">4. Triển khai</a>
   <a href="#bo-phan">5. Bộ phận</a><a href="#vi-du-bo-phan">Ví dụ triển khai theo bộ phận</a>
-  <a href="#may-in">6. Máy in</a><a href="#doi-mang">7. Khi đổi mạng</a><a href="#loi">Khi gặp lỗi</a>
+  <a href="#may-in">6. Máy in</a><a href="#doi-mang">7. Khi đổi mạng</a><a href="#cap-nhat">8. Cập nhật tool</a><a href="#loi">Khi gặp lỗi</a>
 </nav>
 <section id="may-chu">
   <h2>1. Khởi tạo máy chủ</h2>
@@ -166,6 +166,15 @@ code{background:var(--paper);border-radius:4px;padding:.1em .25em;overflow-wrap:
     <li>Chép file mới sang máy con, nhấp đúp, bấm <b>Yes</b> và đợi <b>THÀNH CÔNG</b>. Khi máy về <b>Online</b>, thử mở ổ mạng hoặc in thử. Nếu tài nguyên chưa dùng được, chọn lại tài nguyên và máy con rồi bấm <b>Triển khai đã chọn</b>.</li>
   </ol>
   <p class="ok"><b>Ví dụ:</b> Máy chủ đổi từ <code>192.168.1.10</code> sang <code>192.168.30.10</code>. Hãy chọn <code>192.168.30.10</code> trên <b>máy chủ</b>, không chọn IP của máy con và không chạy lại file cũ trỏ về mạng trước.</p>
+</section>
+<section id="cap-nhat">
+  <h2>8. Cập nhật tool trên máy chủ</h2>
+  <ol>
+    <li>Mở LAN Share bình thường. Tool tự kiểm tra bản mới khi có Internet. Bạn cũng có thể bấm <b>Sao lưu / Phục hồi → Kiểm tra cập nhật GitHub...</b>.</li>
+    <li>Nếu có bản mới, chọn <b>Yes</b> để tải và cài, hoặc <b>No</b> để làm sau. Đợi quá trình triển khai máy con kết thúc trước khi cập nhật.</li>
+    <li>Tool tự mở lại sau khi cài. Danh sách máy con và cấu hình được giữ nguyên. Bấm <b>Khởi tạo máy chủ</b> nếu muốn tiếp tục nhận kết nối.</li>
+  </ol>
+  <p>Nếu bản mới có sửa phần máy con, xuất và chạy lại file đăng ký trên các máy cần cập nhật. Nếu bản cũ chưa có nút kiểm tra cập nhật, tải bản mới thủ công một lần.</p>
 </section>
 <section id="loi">
   <h2>Khi gặp lỗi</h2>
