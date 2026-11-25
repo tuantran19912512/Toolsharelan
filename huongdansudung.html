@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hướng dẫn sử dụng LAN Share — Tool_Share_LAN</title>
+<style>
+  :root{
+    --blue:#14568d; --blue2:#234e83; --teal:#08707b; --green:#21633f;
+    --ink:#1f2d3d; --muted:#5c6b7b; --line:#d6e0ea; --bg:#f4f7fb;
+    --warn:#fff3cd; --warnink:#7a5600; --err:#fdecec; --errink:#a32230;
+    --ok:#e7f5ec; --okink:#17663c; --card:#fff;
+  }
+  *{box-sizing:border-box}
+  body{font:15px/1.65 "Segoe UI",Arial,sans-serif;color:var(--ink);margin:0;background:var(--bg)}
+  header{background:linear-gradient(135deg,#123f6b,#1f6fa8);color:#fff;padding:34px 20px 26px}
+  header .wrap{max-width:1080px;margin:auto}
+  header h1{margin:0 0 6px;font-size:30px}
+  header p{margin:4px 0;color:#dbeeff}
+  header .badge{display:inline-block;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);border-radius:20px;padding:3px 12px;font-size:12px;margin-right:8px}
+  .wrap{max-width:1080px;margin:auto;padding:0 20px}
+  nav{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5;box-shadow:0 2px 8px rgba(20,60,100,.06)}
+  nav .wrap{padding-top:10px;padding-bottom:10px}
+  nav a{display:inline-block;margin:2px 10px 2px 0;color:var(--blue);text-decoration:none;font-size:13px;font-weight:600}
+  nav a:hover{text-decoration:underline}
+  main{padding:24px 0 60px}
+  section{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:22px 26px;margin:0 0 20px;box-shadow:0 3px 14px rgba(20,60,100,.05)}
+  h2{margin:0 0 14px;font-size:22px;color:var(--blue);border-bottom:2px solid #e3edf6;padding-bottom:8px}
+  h3{margin:22px 0 8px;font-size:17px;color:var(--blue2)}
+  h4{margin:16px 0 6px;font-size:15px;color:var(--teal)}
+  p{margin:8px 0}
+  ul,ol{margin:8px 0 8px 22px;padding:0}
+  li{margin:5px 0}
+  table{border-collapse:collapse;width:100%;margin:12px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;overflow-wrap:anywhere}
+  th{background:#edf4fb;color:var(--blue2)}
+  tr:nth-child(even) td{background:#fafcfe}
+  code{background:#eef3f8;border:1px solid #dbe5ef;border-radius:4px;padding:1px 6px;font:13px Consolas,Monaco,monospace;color:#22456b}
+  .note,.warn,.err,.ok{border-left:5px solid #9db8d2;border-radius:6px;padding:10px 14px;margin:12px 0}
+  .note{background:#eff5fb}
+  .warn{background:var(--warn);border-color:#e0a800;color:var(--warnink)}
+  .err{background:var(--err);border-color:#d8535f;color:var(--errink)}
+  .ok{background:var(--ok);border-color:#3a9d64;color:var(--okink)}
+  .step{background:#f7fafd;border:1px solid var(--line);border-left:5px solid var(--blue);border-radius:8px;padding:12px 16px;margin:12px 0}
+  .step b{color:var(--blue)}
+  .btn{display:inline-block;min-width:118px;text-align:center;background:#e1e8f1;color:#23334a;border:1px solid #b9c9da;border-radius:6px;padding:5px 10px;font-weight:600;font-size:13px;margin:2px 4px 2px 0}
+  .btn.primary{background:#2563a6;color:#fff;border-color:#1d4e85}
+  .btn.teal{background:#087f8c;color:#fff;border-color:#076570}
+  .btn.purple{background:#7350a2;color:#fff;border-color:#5c3f84}
+  .btn.green{background:#217a4a;color:#fff;border-color:#185d38}
+  .btn.danger{background:#fbe4e5;color:#a32230;border-color:#e4aeb3}
+  .btn.yellow{background:#fff0cd;color:#805300;border-color:#e3c377}
+  .flow{background:#123f6b;color:#dceeff;border-radius:8px;padding:16px 18px;font:13px/1.9 Consolas,Monaco,monospace;overflow-x:auto;white-space:pre}
+  .toc{columns:2;column-gap:32px}
+  .toc a{color:var(--blue);text-decoration:none;display:block;padding:2px 0;font-size:14px}
+  .toc a:hover{text-decoration:underline}
+  .small{font-size:13px;color:var(--muted)}
+  .kbd{font:12px Consolas,monospace;background:#22384f;color:#fff;border-radius:4px;padding:2px 6px}
+  footer{text-align:center;color:var(--muted);font-size:12px;padding:20px 0 36px}
+  @media(max-width:760px){.toc{columns:1}header h1{font-size:23px}section{padding:18px}}
+  @media print{
+    body{background:#fff}header{background:#14568d !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    nav{display:none}section{box-shadow:none;border:1px solid #ccc;break-inside:avoid-page}
+    h2{break-after:avoid}h3,h4{break-after:avoid}table{break-inside:avoid}
+    a{color:inherit;text-decoration:none}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Hướng dẫn sử dụng LAN Share</h1>
+    <p><span class="badge">Tool_Share_LAN</span><span class="badge">Máy chủ WinForms</span><span class="badge">Client Windows + macOS</span></p>
+    <p>Chia sẻ thư mục, ổ đĩa và máy in cho nhiều máy trong LAN — triển khai và phân quyền từ một giao diện duy nhất.</p>
+  </div>
+</header>
+
+<nav><div class="wrap">
+  <a href="#gioithieu">1. Giới thiệu</a>
+  <a href="#chuanbi">2. Chuẩn bị</a>
+  <a href="#khoi-dong">3. Khởi động</a>
+  <a href="#giao-dien">4. Giao diện</a>
+  <a href="#khoi-tao">5. Khởi tạo máy chủ</a>
+  <a href="#tai-nguyen">6. Tài nguyên</a>
+  <a href="#dang-ky">7. Gói đăng ký</a>
+  <a href="#trien-khai">8. Triển khai</a>
+  <a href="#tien-trinh">9. Tiến trình</a>
+  <a href="#bo-phan">10. Bộ phận</a>
+  <a href="#may-moi">11. Máy mới</a>
+  <a href="#sao-luu">12. Sao lưu</a>
+  <a href="#bao-tri">13. Bảo trì</a>
+  <a href="#bao-cao">14. Báo cáo</a>
+  <a href="#mac">15. macOS</a>
+  <a href="#khac-phuc">16. Khắc phục</a>
+</div></nav>
+
+<main class="wrap">
+
+<section id="gioithieu">
+  <h2>1. Giới thiệu &amp; nguyên lý hoạt động</h2>
+  <p>LAN Share gồm một <b>máy chủ</b> (chạy <code>bin\May-chu.ps1</code>) và các <b>máy con</b> đã cài gói đăng ký. Máy chủ lưu cấu hình, cấp quyền chia sẻ trên Windows và xếp lệnh; máy con định kỳ (5 giây) hỏi lệnh, tự map ổ đĩa hoặc thêm máy in, rồi gửi kết quả về.</p>
+  <div class="flow">[Máy chủ]  Khởi tạo ──&gt; chọn tài nguyên ──&gt; Tạo file đăng ký ──&gt; Triển khai
+                 │                                              │
+        http://IP:41866/api/  &lt;── AES-256 + HMAC-SHA256 ──&gt;  [Máy con]
+                 │                                              │
+        jobs.json / clients.json                    map ổ D-Z / Add-Printer / mount SMB</div>
+  <div class="note"><b>Thứ tự nhớ nhanh:</b> Khởi tạo máy chủ → chọn tài nguyên → tạo file đăng ký → chạy trên máy con → tick máy → Triển khai. Rê chuột lên bất kỳ nút nào trong giao diện để xem giải thích ngay ở ô hướng dẫn phía dưới.</div>
+  <p class="small">Giao tiếp dùng HTTP POST tới cổng <code>41866</code>. Bản tin được mã hóa AES-256-CBC và ký HMAC-SHA256; khóa phiên máy con được bọc RSA-2048 lúc đăng ký. Mỗi bản tin có thời gian (lệch tối đa 2 phút) và nonce chống phát lại.</p>
+</section>
+
+<section id="chuanbi">
+  <h2>2. Yêu cầu &amp; chuẩn bị</h2>
+  <table>
+    <tr><th>Vai trò</th><th>Yêu cầu</th><th>Ghi chú</th></tr>
+    <tr><td>Máy chủ</td><td>Windows 10/11, workgroup, PowerShell 5.1, quyền Administrator</td><td>Không dùng được nếu máy thuộc domain. Cần quyền quản trị để đổi firewall/tài khoản/share.</td></tr>
+    <tr><td>Máy con Windows</td><td>Windows 10/11 (đầy đủ tính năng) hoặc Windows 7 SP1 + WMF 5.1 + .NET Framework 4.6.2+</td><td>Windows 7 dùng bộ adapter legacy: nhận thư mục/máy in cơ bản.</td></tr>
+    <tr><td>Máy con macOS</td><td>macOS + Python 3.10+; Internet lần đầu để cài <code>cryptography</code></td><td>Chỉ nhận thư mục SMB trong Finder, chưa tự cài máy in Windows.</td></tr>
+    <tr><td>Mạng</td><td>Cùng LAN, ping được nhau; cổng TCP 41866 không bị chặn</td><td>Khởi tạo sẽ tắt Firewall trên máy chủ và chuyển mạng sang Private.</td></tr>
+  </table>
+  <div class="warn"><b>Quan trọng:</b> Giải nén giữ nguyên cấu trúc thư mục <code>Tool_Share_LAN</code>. Chạy launcher từ thư mục gốc để tool tìm thấy <code>bin\May-chu.ps1</code>. Không đổi tên file trong <code>bin\</code>.</div>
+</section>
+
+<section id="khoi-dong">
+  <h2>3. Khởi động công cụ</h2>
+  <div class="step"><b>Bước 1.</b> Vào thư mục <code>Tool_Share_LAN</code>, nhấp đúp <code>Mo-may-chu.cmd</code> (hoặc <code>Mo-may-chu.vbs</code>).</div>
+  <div class="step"><b>Bước 2.</b> Khi Windows hỏi UAC, bấm <span class="kbd">Yes</span>. Cửa sổ PowerShell chạy ẩn; giao diện "<b>LAN Share - Máy chủ</b>" sẽ hiện ra.</div>
+  <p>Nếu lỗi "<i>Không tìm thấy bin\May-chu.ps1</i>", bạn đã giải nén thiếu thư mục <code>bin</code> — hãy giải nén lại toàn bộ.</p>
+</section>
+
+<section id="giao-dien">
+  <h2>4. Tổng quan giao diện</h2>
+  <p>Giao diện chia làm 3 nhóm rõ ràng, kèm thanh trạng thái, ô nhật ký và ô hướng dẫn:</p>
+  <table>
+    <tr><th>Nhóm</th><th>Nội dung</th></tr>
+    <tr><td><b>1. Thiết lập máy chủ</b> <span style="color:#234e83">● xanh dương</span></td><td>IP, tài khoản/mật khẩu share, mật khẩu Administrator (nếu có), tick SID, các nút Khởi tạo / Tạo file đăng ký / Quản lý bộ phận / Sao lưu – Phục hồi / Bảo trì.</td></tr>
+    <tr><td><b>2. Tài nguyên chia sẻ</b> <span style="color:#08707b">● xanh ngọc</span></td><td>Bảng danh sách thư mục/máy in với cột Chọn, Loại, Tên share, Đường dẫn, Quyền, Ổ máy con, Phân quyền; các nút thêm/chọn/nạp/xóa/quyền bộ phận.</td></tr>
+    <tr><td><b>3. Máy con và triển khai</b> <span style="color:#21633f">● xanh lá</span></td><td>Bảng máy con (Chọn, ID, Máy con, IP, Người dùng, Bộ phận, Trạng thái, Kết quả, Tiến trình) + nút Chọn tất cả / Gán bộ phận / Lưu báo cáo / Xóa / Xem tiến trình / Triển khai.</td></tr>
+  </table>
+  <p>Thanh <b>TRẠNG THÁI</b> cho biết bộ nhận đã chạy chưa và địa chỉ đang lắng nghe. Ô <b>Nhật ký</b> ghi thao tác và kết quả từng tài nguyên. Ô màu xanh nhạt cuối cửa sổ là <b>hướng dẫn theo ngữ cảnh</b> — di chuột vào nút là hiện giải thích.</p>
+</section>
+
+<section id="khoi-tao">
+  <h2>5. Bước 1 — Khởi tạo máy chủ</h2>
+  <table>
+    <tr><th>Trường / nút</th><th>Cách dùng</th></tr>
+    <tr><td><b>IP máy chủ</b></td><td>Chọn IP mà máy con truy cập được (ưu tiên IP có route mặc định). Địa chỉ này được nhúng vào gói đăng ký.</td></tr>
+    <tr><td><b>User share</b></td><td>Tài khoản local tạo/cập nhật trên máy chủ để cấp quyền. Mặc định <code>print</code>. Chỉ dùng chữ, số, gạch ngang/gạch dưới, tối đa 20 ký tự; không được trùng Administrator/Guest.</td></tr>
+    <tr><td><b>Mật khẩu</b></td><td>Mật khẩu tài khoản share, mặc định <code>12345678</code> — nên đổi. Không được để trống.</td></tr>
+    <tr><td><b>Mật khẩu Administrator</b></td><td>Điền nếu muốn máy con thử tài khoản Administrator của máy chủ trước Guest và share. Để trống thì bỏ lần thử riêng này.</td></tr>
+    <tr><td><b>Tự xử lý SID trùng</b></td><td>Tick mặc định: khi triển khai lỗi do trùng SID, tool tự kiểm tra sự kiện <code>LsaSrv 6167</code> và áp bản sửa tạm, báo máy cần restart.</td></tr>
+    <tr><td><span class="btn primary">Khởi tạo máy chủ</span></td><td>Thực hiện: mạng Public → Private, tắt Firewall 3 profile, tạo/cập nhật tài khoản share, chạy dịch vụ <code>LanmanServer</code>, mở bộ nhận tại <code>http://IP:41866/</code>. Đồng thời lưu <code>network-before.json</code> để khôi phục.</td></tr>
+  </table>
+  <div class="step"><b>Thao tác:</b> chọn IP → kiểm tra user/pass → bấm <span class="btn primary">Khởi tạo máy chủ</span>. Khi thanh trạng thái hiện "<b>Sẵn sàng - đang nhận máy con tại IP:41866</b>" là thành công.</div>
+  <div class="warn">Sau khi khởi tạo, ô IP bị khóa. Muốn đổi IP phải dùng menu <b>Sao lưu / Phục hồi → Cập nhật IP máy chủ</b> (xem mục 12).</div>
+</section>
+
+<section id="tai-nguyen">
+  <h2>6. Bước 2 — Chọn tài nguyên cần chia sẻ</h2>
+  <p>Tick vào cột <b>Chọn</b> của từng dòng bạn muốn triển khai. Cột <b>Phân quyền</b> cho biết tài nguyên dùng chung (<i>Chung</i>) hay theo bộ phận.</p>
+
+  <h3>6.1. Thêm thư mục / ổ đĩa</h3>
+  <div class="step"><b>Bước 1.</b> Bấm <span class="btn teal">Thêm thư mục / ổ đĩa</span> → chọn thư mục hoặc gốc ổ đĩa trên máy chủ.</div>
+  <div class="step"><b>Bước 2.</b> Nhập <b>tên share</b> (tên xuất hiện trong đường dẫn <code>\\MAY-CHU\TenShare</code>), bấm OK.</div>
+  <div class="step"><b>Bước 3.</b> Trong bảng, đặt <b>Quyền Share/NTFS</b> và <b>Ổ máy con</b>.</div>
+
+  <h3>6.2. Chọn máy in</h3>
+  <div class="step">Bấm <span class="btn teal">Chọn máy in</span> → cửa sổ hiện các ô có icon máy in; bấm vào máy in cần chia sẻ → bấm <b>Chọn máy in</b> → nhập tên share. Khi triển khai, tool bật share, cấp quyền in và kèm driver INF đã ký vào gói đăng ký.</div>
+  <div class="note">Cần cài máy in trên <b>máy chủ</b> trước. Với máy in đã share sẵn, dùng nút <b>Nạp share có sẵn</b> để lấy vào bảng.</div>
+
+  <h3>6.3. Nạp share có sẵn / tắt share</h3>
+  <p><span class="btn teal">Nạp share có sẵn</span> đọc các SMB share và máy in đang bật trên Windows, thêm vào bảng với quyền <i>Keep</i> và <b>chưa tick</b>. <span class="btn danger">Tắt share và bỏ</span> tắt chia sẻ các dòng đang bôi chọn (có xác nhận) — máy đang dùng sẽ mất kết nối.</p>
+
+  <h3>6.4. Bảng quyền</h3>
+  <table>
+    <tr><th>Giá trị</th><th>Ý nghĩa</th></tr>
+    <tr><td><b>Keep</b></td><td>Giữ nguyên quyền hiện có. Dùng cho share đã cấu hình sẵn; share phải còn trỏ đúng đường dẫn.</td></tr>
+    <tr><td><b>Read</b></td><td>Đọc / chạy (NTFS: ReadAndExecute).</td></tr>
+    <tr><td><b>Change</b></td><td>Đọc, tạo, sửa, xóa (NTFS: Modify) — mặc định khi thêm thư mục.</td></tr>
+    <tr><td><b>Full</b></td><td>Toàn quyền (NTFS: FullControl).</td></tr>
+    <tr><td><b>Ổ máy con</b></td><td><code>Auto</code> = tự chọn ký tự trống từ Z về D; hoặc cố định D–Z (máy con báo lỗi nếu ký tự đã dùng).</td></tr>
+  </table>
+  <p class="small">Mẹo: cột <i>Quyền</i> và <i>Ổ máy con</i> sẽ tự cập nhật khi bạn kéo chuột; trước khi triển khai, tool kiểm tra trùng tên share.</p>
+
+  <h3>6.5. Quyền bộ phận cho tài nguyên</h3>
+  <div class="step">Bôi chọn <b>đúng một dòng</b> tài nguyên → bấm <span class="btn purple">Quyền bộ phận</span>. Checkbox "<i>Chỉ cho các bộ phận được chọn truy c share này</i>" quyết định dùng quyền chung hay quyền riêng. Với thư mục chọn Read/Change/Full cho từng bộ phận; với máy in chọn <i>Không</i> hoặc <i>In</i>. Bấm <b>Lưu quyền</b>, sau đó bấm Triển khai để áp dụng lên Windows.</div>
+  <div class="warn">Khi bật chế độ này, ACL của thư mục được <b>đặt lại</b> (chỉ giữ Administrators, SYSTEM và các bộ phận được chọn); không áp được cho gốc ổ đĩa. Tool luôn sao lưu ACL/share cũ vào <code>Backups\</code> trước khi đổi.</div>
+</section>
+
+<section id="dang-ky">
+  <h2>7. Bước 3 — Tạo và chạy gói đăng ký</h2>
+  <p>Bấm <span class="btn primary">Tạo file đăng ký</span> sẽ hiện menu gồm 2 lựa chọn:</p>
+  <table>
+    <tr><th>Loại gói</th><th>Cách làm</th><th>Lưu ý</th></tr>
+    <tr><td><b>Windows (.cmd)</b><br><code>Dang-ky-may-con.cmd</code></td><td>Copy file tới từng máy con, nhấp đúp chạy, chấp nhận UAC.</td><td>Tự cấu hình mạng, cài bộ hỗ trợ driver (Win 10/11) và khởi động agent nền. Kèm driver của các máy in đã tick.</td></tr>
+    <tr><td><b>macOS (.zip)</b><br><code>Dang-ky-macOS.zip</code></td><td>Giải nén trên Mac, mở Terminal chạy <code>./Dang-ky-macOS.command</code>.</td><td>Cần Python 3.10+ và Internet lần đầu. Chỉ nhận thư mục SMB.</td></tr>
+  </table>
+
+  <h3>7.1. Đăng ký trên máy con Windows</h3>
+  <ol>
+    <li>Nhấp đúp file <code>.cmd</code> (đừng "Run as administrator" — tool sẽ tự hỏi UAC riêng để ổ đĩa hiện đúng phiên người dùng).</li>
+    <li>Ấn <span class="kbd">Yes</span> khi UAC hỏi cấu hình mạng và cài bộ hỗ trợ driver.</li>
+    <li>Đợi thông báo "<b>THÀNH CÔNG: máy chủ đã nhận kết nối từ chương trình nền mới</b>".</li>
+    <li>Kiểm tra báo cáo <code>Dang-ky-report.txt</code> ngay trong thư mục chứa gói. Nếu thất bại, xem ở đó lý do (sai IP, firewall, UAC bị từ chối…).</li>
+  </ol>
+  <p class="small">Để gỡ: chạy <code>Dang-ky-may-con.cmd /remove</code> — tool dỡ tự khởi động, khôi phục mạng nhưng giữ ổ/máy in đã thêm.</p>
+
+  <h3>7.2. Khi chạy lại gói đăng ký</h3>
+  <p>Máy con tự giữ <code>ClientId</code> và khóa cũ nếu cùng site &amp; cùng thiết bị. Nếu đã cài lại Windows (đổi DeviceIdentity) hoặc muốn tách máy, tool tự cấp danh tính mới — khi đó hãy xóa đăng ký cũ trên máy chủ nếu cần.</p>
+</section>
+
+<section id="trien-khai">
+  <h2>8. Bước 4 — Gán bộ phận &amp; triển khai</h2>
+  <div class="step"><b>Bước 1.</b> Ở bảng "Máy con", tick cột <b>Chọn</b> cho các máy cần triển khai. Dùng <span class="btn">Chọn tất cả</span> nếu cần (kể cả máy offline — chúng sẽ nhận lệnh khi kết nối lại).</div>
+  <div class="step"><b>Bước 2 (tuỳ chọn).</b> Bấm <span class="btn purple">Gán bộ phận</span> → chọn bộ phận hoặc "<i>Chung - dùng cấu hình mặc định</i>" → bấm Gán bộ phận. Lưu ý: máy đã gán bộ phận phải chạy gói đăng ký <b>mới</b> để có thông tin tài khoản bộ phận.</div>
+  <div class="step"><b>Bước 3.</b> Bấm <span class="btn green">Triển khai đã chọn</span>.</div>
+  <p>Trình tự tool thực hiện: tạo/cập nhật share &amp; quyền trên máy chủ → tạo tài khoản bộ phận (nếu có) → ghi lệnh vào <code>jobs.json</code> → máy con nhận lệnh trong ~5 giây → tự map ổ / thêm máy in → gửi kết quả <b>OK</b> hoặc <b>Failed</b> về bảng.</p>
+  <div class="note">Máy con thử kết nối bằng: phiên hiện tại → Administrator (nếu điền mật khẩu) → Guest → tài khoản share (tự lưu credential). Nếu đang có phiên SMB bằng tài khoản khác (lỗi 1219), hãy đóng file đang mở/đăng xuất rồi triển khai lại.</div>
+  <table>
+    <tr><th>Nút</th><th>Chức năng</th></tr>
+    <tr><td><span class="btn">Xem tiến trình</span></td><td>Mở cửa sổ tiến trình chi tiết của máy đang chọn (cập nhật tự động).</td></tr>
+    <tr><td><span class="btn danger">Xóa máy đã chọn</span></td><td>Xóa đăng ký và lịch sử lệnh. Agent trên máy đó ngừng nhận lệnh; chạy lại gói đăng ký để dùng lại.</td></tr>
+    <tr><td><span class="btn">Lưu báo cáo</span></td><td>Xuất HTML hoặc JSON (xem mục 14).</td></tr>
+  </table>
+  <p><b>Trạng thái máy:</b> <i>Đang triển khai</i> (online + có lệnh chạy), <i>Online</i>, <i>Chờ phản hồi</i>, <i>Offline</i> (không phản hồi ~35 giây), <i>Đã thay thế</i> (máy cũ bị máy mới thay sau cài lại Windows).</p>
+</section>
+
+<section id="tien-trinh">
+  <h2>9. Theo dõi tiến trình &amp; kết quả</h2>
+  <ul>
+    <li><b>Trên máy chủ:</b> nhấp <b>đúp</b> vào một dòng máy con (hoặc bấm <b>Xem tiến trình</b>) → cửa sổ tự cập nhật gồm IP, thời gian liên lạc, tiến trình từng tài nguyên, nhật ký gần nhất và kết quả cuối cùng. Có nút <b>Lưu TXT</b>.</li>
+    <li><b>Trên máy con Windows:</b> khi có lệnh, cửa sổ "LAN Share - Tiến trình máy con" hiện tự động: thanh tiến trình, bảng từng tài nguyên (Pending/Running/OK/Failed) và nhật ký từng bước. Nút <b>Mở kết quả TXT</b> mở <code>Ket-qua-trien-khai.txt</code>; nút <b>Mở chẩn đoán driver</b> mở <code>Chan-doan-driver.txt</code> khi có lỗi.</li>
+    <li>Đóng cửa sổ tiến trình <b>chỉ ẩn</b>, không hủy triển khai.</li>
+  </ul>
+  <div class="note">Nếu tài nguyên báo <i>Failed</i>, nhấp đúp vào máy trên host để đọc thông báo chi tiết (mã lỗi Windows, tên tài khoản đã thử…). Nhật ký đầy đủ nằm ở <code>client.log</code> trên máy con.</div>
+</section>
+
+<section id="bo-phan">
+  <h2>10. Quản lý bộ phận &amp; phân quyền</h2>
+  <h3>10.1. Tạo bộ phận</h3>
+  <div class="step">Bấm <span class="btn purple">Quản lý bộ phận</span> → trong lưới nhập <b>Tên bộ phận</b>; tool tự gợi ý <b>Tài khoản</b> (dạng <code>bp_ten_xxxx</code>) và <b>Mật khẩu</b> (<code>12345678</code>) — có thể sửa. Bấm <b>Lưu bộ phận</b>.</div>
+  <p>Quy tắc: tên bộ phận, tài khoản và ID không trùng; tài khoản phải khác tài khoản share dùng chung, khác Administrator/Guest và không được là quản trị viên. Mỗi bộ phận sẽ có một tài khoản local riêng được tạo trên máy chủ lúc triển khai.</p>
+
+  <h3>10.2. Gán máy vào bộ phận</h3>
+  <p>Tick máy trong bảng → <span class="btn purple">Gán bộ phận</span> → chọn tên bộ phận → bấm Gán. Chọn "<i>Chung</i>" để dùng tài khoản share mặc định. Sau khi gán, máy cần gói đăng ký mới (có khóa riêng) để nhận thông tin tài khoản bộ phận.</p>
+
+  <h3>10.3. Áp quyền cho tài nguyên</h3>
+  <p>Bôi một dòng tài nguyên → <span class="btn purple">Quyền bộ phận</span> → tick chế độ giới hạn → đặt quyền từng bộ phận → <b>Lưu quyền</b> → <span class="btn green">Triển khai đã chọn</span>. Khi triển khai, mỗi máy <b>chỉ nhận</b> tài nguyên được cấp cho bộ phận của nó và các tài nguyên dùng chung.</p>
+  <div class="warn">Nếu máy báo "<i>cần chạy lại file đăng ký mới để nhận phân quyền bộ phận</i>", hãy tạo lại gói đăng ký và chạy trên máy đó trước khi triển khai lại.</div>
+</section>
+
+<section id="may-moi">
+  <h2>11. Máy mới &amp; dùng lại rule</h2>
+  <p>Ngay khi một máy đăng ký lần đầu, cửa sổ "<b>Máy con vừa tham gia LAN Share</b>" hiện với 3 lựa chọn:</p>
+  <ul>
+    <li><b>Dùng rule máy mẫu</b> — chọn một máy đã triển khai thành công; tool áp lại cùng bộ phận, tài nguyên và ký tự ổ, đồng thời kiểm tra lại quyền.</li>
+    <li><span class="btn">Cấu hình mới</span> — tự tick máy đó, bỏ tick tài nguyên; bạn chọn tài nguyên/bộ phận rồi bấm Triển khai.</li>
+    <li><b>Để sau</b> — đóng thông báo, cấu hình lúc khác.</li>
+  </ul>
+  <p>Nếu máy mới thay cho máy cũ vừa cài lại Windows, tick "<i>Máy này thay cho máy mẫu…</i>" — đăng ký cũ sẽ bị hủy nhận lệnh, lịch sử được giữ lại.</p>
+  <p class="small">Có thể mở lại hộp này bất kỳ lúc nào: bôi một dòng máy con → chuột phải → <b>Dùng rule từ máy khác...</b></p>
+</section>
+
+<section id="sao-luu">
+  <h2>12. Sao lưu, phục hồi &amp; đổi IP</h2>
+  <p>Bấm <span class="btn primary">Sao lưu / Phục hồi</span> để mở menu:</p>
+  <table>
+    <tr><th>Mục</th><th>Cách dùng &amp; lưu ý</th></tr>
+    <tr><td><b>Sao lưu cấu hình có mật khẩu...</b></td><td>Chọn nơi lưu file <code>*.lanbackup</code>, nhập mật khẩu ≥ 10 ký tự. Gồm host.json, clients, client-keys, jobs, resources, departments. <b>Không gồm</b> dữ liệu thư mục, driver hay quyền Windows.</td></tr>
+    <tr><td><b>Khôi phục bản sao lưu...</b></td><td><b>Đóng rồi mở lại tool</b>, chọn IP hiện tại, chọn file, nhập mật khẩu. Cần khởi tạo &amp; triển khai lại để tạo tài khoản/share. Các lệnh Pending/Running cũ bị hủy, không tự chạy lại.</td></tr>
+    <tr><td><b>Cập nhật IP máy chủ / tạo lại gói đăng ký...</b></td><td>Dừng bộ nhận, làm mới danh sách IP. Chọn IP mới → bấm Khởi tạo → tạo gói đăng ký mới cho máy con (nếu DNS không phân giải tên máy chủ).</td></tr>
+  </table>
+  <div class="warn">File backup chứa khóa và mật khẩu — hãy lưu nơi an toàn và dùng mật khẩu mạnh.</div>
+</section>
+
+<section id="bao-tri">
+  <h2>13. Bảo trì &amp; khôi phục mạng</h2>
+  <p>Bấm <span class="btn yellow">Bảo trì / Khôi phục mạng...</span> để mở nhóm 3 nút (có thể dùng riêng từ menu Sao lưu/Phục hồi):</p>
+  <table>
+    <tr><th>Nút</th><th>Chức năng</th></tr>
+    <tr><td><span class="btn yellow">Khôi phục mạng</span></td><td>Dùng bản sao <code>network-before.json</code> để trả lại trạng thái firewall/loại mạng trước lần khởi tạo đầu. Dừng bộ nhận. <b>Nên bấm khi kết thúc dùng tool.</b></td></tr>
+    <tr><td><span class="btn yellow">Hoàn tác SID tạm</span></td><td>Gỡ giá trị Registry do tool tạo; cần khởi động lại máy chủ để có hiệu lực.</td></tr>
+    <tr><td><span class="btn yellow">Khởi động lại máy chủ</span></td><td>Dùng khi kết quả báo cần restart. Các phiên đang truy cập share sẽ bị ngắt.</td></tr>
+  </table>
+</section>
+
+<section id="bao-cao">
+  <h2>14. Báo cáo</h2>
+  <div class="step">Bấm <span class="btn">Lưu báo cáo</span> → chọn <b>HTML</b> (đọc/in; có stylesheet sẵn, in được) hoặc <b>JSON</b> (đối chiếu dữ liệu) → chọn nơi lưu.</div>
+  <p>Báo cáo gồm:</p>
+  <ul>
+    <li><b>Trạng thái chia sẻ trên Windows</b> — đọc trực tiếp lúc xuất: đường dẫn, quyền Share, quyền NTFS, driver/cổng máy in, quyền máy in.</li>
+    <li><b>Cấu hình trong công cụ</b> — tài nguyên đã khai báo, quyền chung, ổ máy con, quyền theo bộ phận.</li>
+    <li><b>Bộ phận</b>, <b>Máy con đã đăng ký</b> (kèm bộ phận &amp; lần phản hồi gần nhất).</li>
+    <li><b>Lịch sử triển khai</b> — từng lệnh: trạng thái, kết quả, mã lỗi, chi tiết từng tài nguyên. Mật khẩu tự động thay bằng <code>[ẩn]</code>.</li>
+  </ul>
+  <p class="small">Lưu ý: phần "trạng thái Windows" là thực tế tại thời điểm xuất; phần "cấu hình" có thể đã khai báo nhưng chưa triển khai.</p>
+</section>
+
+<section id="mac">
+  <h2>15. Sử dụng trên macOS</h2>
+  <ol>
+    <li>Trên máy chủ: tick thư mục cần chia sẻ → <b>Tạo file đăng ký → Xuất đăng ký macOS (.zip)</b>.</li>
+    <li>Trên Mac: giải nén, mở Terminal trong thư mục giải nén, chạy <code>./Dang-ky-macOS.command</code>.</li>
+    <li>Lần đầu script tự tạo <code>venv</code> và cài <code>cryptography==50.0.2</code> (cần Internet).Nhập mật khẩu tài khoản macOS nếu được hỏi.</li>
+    <li>Sau khi thấy "<b>Đã đăng ky macOS và bật chương trình nhận lệnh</b>", về máy chủ tick máy Mac → <b>Triển khai</b>.</li>
+    <li>Thư mục sẽ xuất hiện trong <b>Finder</b> (không có ký tự ổ kiểu Windows). Kết quả lưu tại <code>~/Library/Application Support/LanShare/&lt;SiteId&gt;/Ket-qua-*.txt</code>.</li>
+  </ol>
+  <div class="warn"><b>Giới hạn macOS:</b> chỉ nhận thư mục SMB; không map ký tự ổ, không tự cài máy in Windows, không thay đổi firewall, không xử lý SID. Nếu máy chủ chọn cả máy in cho máy Mac, tool sẽ bỏ qua và ghi chú trong nhật ký.</div>
+  <p>Gỡ tự khởi động: chạy <code>./Go-dang-ky.command</code> trong thư mục đã giải nén (các kết nối SMB đang dùng được giữ lại).</p>
+</section>
+
+<section id="khac-phuc">
+  <h2>16. Câu hỏi thường gặp &amp; khắc phục sự cố</h2>
+  <table>
+    <tr><th>Vấn đề</th><th>Cách xử lý</th></tr>
+    <tr><td>Máy con không xuất hiện trong bảng</td><td>Đảm bảo máy chủ đã <b>Khởi tạo</b> (thanh trạng thái "Sẵn sàng"), đúng IP, hai máy ping được nhau. Xem <code>Dang-ky-report.txt</code> và <code>client.log</code> trên máy con.</td></tr>
+    <tr><td>Lỗi "đồng hồ lệch quá 2 phút"</td><td>Chỉnh giờ hệ thống hai máy chênh không quá 120 giây.</td></tr>
+    <tr><td>"Chạy lại gói đăng ký để cấp khóa"</td><td>Gói đăng ký cũ không khớp dữ liệu máy chủ. Tạo gói mới và chạy lại trên máy con.</td></tr>
+    <tr><td>Kết nối báo mã 5 / 1326 / 1219</td><td>Sai quyền/tài khoản hoặc đang có phiên SMB khác. Đóng file đang mở, đăng xuất Windows rồi triển khai lại; kiểm tra quyền Share/NTFS của tài khoản share.</td></tr>
+    <tr><td>Map ổ báo "ổ đã được sử dụng"</td><td>Chọn <code>Auto</code> hoặc ngắt ổ cũ; tool tự chọn ký tự trống D–Z.</td></tr>
+    <tr><td>Máy in báo lỗi driver / "Do you trust this printer?"</td><td>Tạo lại gói đăng ký có tick máy in để kèm driver đúng kiến trúc, chạy lại và chấp nhận UAC. Khi Windows hỏi, bấm <b>Install driver</b>. Xem <code>Chan-doan-driver.txt</code> / <code>Doi-chieu-driver.txt</code>.</td></tr>
+    <tr><td>Kết quả báo cần khởi động lại</td><td>Bấm <b>Khởi động lại máy chủ</b> và/hoặc restart máy con theo thông báo, rồi triển khai lại nếu cần. Có thể dùng <b>Hoàn tác SID tạm</b> nếu muốn gỡ bản sửa.</td></tr>
+    <tr><td>Đổi IP / đổi tên máy chủ</td><td>Dùng <b>Cập nhật IP máy chủ</b>, khởi tạo lại và phát gói đăng ký mới. Nếu đổi tên máy chủ, cần chạy lại gói để cập nhật địa chỉ dự phòng.</td></tr>
+    <tr><td>Có nên tắt Firewall vĩnh viễn?</td><td>Không. Tool chỉ tắt tạm để triển khai; hãy bấm <b>Khôi phục mạng</b> khi xong việc và cân nhắc mở lại Firewall theo chính sách bảo mật.</td></tr>
+  </table>
+
+  <h3>Bảng tắt các nút theo nhóm (để tra nhanh)</h3>
+  <table>
+    <tr><th>Nút</th><th>Nhóm màu</th><th>Nút</th><th>Nhóm màu</th></tr>
+    <tr><td>Khởi tạo máy chủ / Tạo file đăng ký</td><td><span class="btn primary">Xanh dương</span></td><td>Thêm thư mục / Chọn máy in / Nạp share</td><td><span class="btn teal">Xanh ngọc</span></td></tr>
+    <tr><td>Quản lý bộ phận / Quyền bộ phận / Gán bộ phận</td><td><span class="btn purple">Tím</span></td><td>Triển khai đã chọn</td><td><span class="btn green">Xanh lá</span></td></tr>
+    <tr><td>Xóa máy / Tắt share và bỏ</td><td><span class="btn danger">Đỏ</span></td><td>Khôi phục mạng / Undo SID / Restart</td><td><span class="btn yellow">Vàng</span></td></tr>
+  </table>
+</section>
+
+</main>
+
+<footer class="wrap">
+  LAN Share — Tool_Share_LAN · Hướng dẫn biên soạn từ mã nguồn project · Cập nhật 20/11/2026<br>
+  Xem thêm thông tin kỹ thuật trong <code>readme.md</code>.
+</footer>
+</body>
+</html>
