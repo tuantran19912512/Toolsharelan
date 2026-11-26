@@ -184,7 +184,7 @@ code{background:var(--paper);border-radius:4px;padding:.1em .25em;overflow-wrap:
     <thead><tr><th scope="col">Nút hoặc mục menu</th><th scope="col">Bấm khi nào?</th></tr></thead>
     <tbody>
       <tr><th scope="row">Khởi tạo máy chủ</th><td>Mở bộ nhận kết nối. Chọn đúng IP, bấm nút và chờ thanh xanh <b>Sẵn sàng</b>.</td></tr>
-      <tr><th scope="row">Tạo file đăng ký</th><td>Khi cần cho máy mới tham gia hoặc gửi lại gói đã cập nhật. Chọn <b>Windows (.cmd)</b> cho máy Windows; chọn <b>macOS (.zip)</b> cho Mac (chỉ chia sẻ thư mục).</td></tr>
+      <tr><th scope="row">Tạo file đăng ký</th><td>Khi cần cho máy mới tham gia hoặc gửi lại gói đã cập nhật. Chọn <b>Windows (.cmd)</b> cho máy Windows; chọn <b>macOS (.zip)</b> cho Mac (chỉ chia sẻ thư mục). Mục <b>tương thích SMB cũ</b> chỉ dùng khi máy con báo lỗi không mở được thư mục chia sẻ.</td></tr>
       <tr><th scope="row">Quản lý bộ phận</th><td>Tạo hoặc sửa bộ phận như Kế toán, Văn phòng. Bấm <b>Lưu bộ phận</b> để lưu hoặc <b>Hủy</b> để bỏ thay đổi trong cửa sổ.</td></tr>
       <tr><th scope="row">Sao lưu / Phục hồi</th><td>Mở menu sao lưu, đổi IP và kiểm tra bản mới. Xem từng mục ở bảng bên dưới.</td></tr>
       <tr><th scope="row">Bảo trì / Khôi phục mạng…</th><td>Mở các nút bảo trì. Không cần dùng trong quy trình triển khai bình thường.</td></tr>
@@ -244,6 +244,7 @@ code{background:var(--paper);border-radius:4px;padding:.1em .25em;overflow-wrap:
     <li><b>Đăng ký thất bại hoặc không thấy máy con:</b> kiểm tra hai máy cùng mạng nội bộ, máy chủ đang <b>Sẵn sàng</b> và file đăng ký mới được xuất từ đúng máy chủ.</li>
     <li><b>Không thấy ổ mạng:</b> kiểm tra đã tick thư mục và máy con, quyền đã cho phép, rồi bấm <b>Triển khai đã chọn</b>. Nếu ổ chọn sẵn đang được dùng, đổi sang <b>Auto</b>.</li>
     <li><b>Không thấy máy in:</b> kiểm tra máy in đã được tick khi xuất gói. Mở <b>Xem tiến trình</b> hoặc gửi <code>Dang-ky-report.txt</code> trên máy con cho người hỗ trợ.</li>
+    <li><b>Máy con không mở được <code>\\TÊN-MÁY-CHỦ</code> dù đúng mật khẩu:</b> ưu tiên kiểm tra máy chủ, tài khoản chia sẻ và cùng mạng LAN. Nếu lỗi do máy con yêu cầu chữ ký SMB (thường gặp trên Windows 11 24H2 trở lên khi nối máy chủ cũ), trên máy chủ chọn <b>Tạo file đăng ký → Xuất đăng ký Windows - tương thích SMB cũ...</b>, rồi chạy gói mới trên đúng máy con đó và chấp nhận UAC. Chỉ dùng trong LAN tin cậy. Gỡ đăng ký bằng <code>/remove</code> sẽ khôi phục thiết lập cũ.</li>
   </ul>
 </section>
 <footer>LAN Share · Hướng dẫn cho người dùng · Ảnh dùng dữ liệu minh họa.</footer>

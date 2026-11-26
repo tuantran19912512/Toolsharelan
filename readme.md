@@ -135,6 +135,7 @@ Tool_Share_LAN/
 | Gói không có driver cho máy in hoặc Windows chưa xác nhận kết nối | Máy con mở trình cài Windows nếu chưa có driver cài sẵn thành công. Hoàn tất **Install driver** / UAC nếu được hỏi; mã thoát `0` của PrintUI không có nghĩa là đã cài xong. Nếu Windows vẫn không cài được, tick đúng máy in trên máy chủ, xuất gói Windows `.cmd` mới, đăng ký lại và xem mục `Driver` trong `Dang-ky-report.txt` trước khi triển khai lại. |
 | Windows 11 vẫn hiện **Turn off** hoặc một tùy chọn in còn **On** | Mở lại **Settings → Bluetooth & devices → Printers & scanners** và xem từng mục trong `Dang-ky-report.txt`. Nếu báo do chính sách, liên hệ quản trị viên. Nếu báo chưa nạp lại Print Spooler, khởi động lại Windows rồi đăng ký lại. Gói chỉ có thư mục không đổi các tùy chọn in. |
 | Kết nối báo 1219 (nhiều phiên SMB) | Đóng file đang mở trên máy con, đăng xuất Windows rồi triển khai lại. |
+| Máy con chỉ truy cập được sau khi bỏ yêu cầu ký SMB | Ưu tiên cấu hình máy chủ để hỗ trợ ký SMB và dùng tài khoản chia sẻ. Nếu cần tương thích với máy chủ cũ trong LAN tin cậy, trên máy chủ chọn **Tạo file đăng ký → Xuất đăng ký Windows - tương thích SMB cũ...** rồi chạy gói mới trên máy con và xác nhận UAC. Có thể tương đương bằng CMD: `"C:\duong-dan\Dang-ky-may-con.cmd" /smb-compat`. Xem dòng **Tương thích SMB** trong `Dang-ky-report.txt`. Thay đổi áp dụng cho toàn máy con; `/remove` khôi phục yêu cầu ký nếu tool đã thay đổi. |
 | Cần gỡ máy con | Tick máy → **Xóa máy đã chọn**. Để cài lại, chạy `Dang-ky-may-con.cmd /remove` để dỡ tự khởi động và khôi phục mạng. |
 | Khôi phục cấu hình | Đóng tool, mở lại, vào **Sao lưu / Phục hồi → Khôi phục bản sao lưu** trước khi bấm Khởi tạo. |
 
@@ -145,7 +146,7 @@ Tool_Share_LAN/
 - Mã nguồn thuần PowerShell 5.1 + .NET Framework (WinForms), không dependency ngoài trên máy chủ. Máy Mac cần `cryptography==50.0.2` trong venv riêng (tự cài lần đầu).
 - `May-chu.ps1` có chế độ `-ValidateOnly [-PreviewPath]` để kiểm tra giao diện (dùng cho phát triển/kiểm thử).
 - Các script builder nhúng mã nguồn vào gói đăng ký dưới dạng JSON → GZip → Base64, bootstrap nằm trong file `.cmd` với ký tự `:LANSHARE_PAYLOAD` (giới hạn 8191 ký tự cho dòng lệnh CMD).
-- Client build hiện tại: `2026.11.25-printer-07`. Máy con đã đăng ký cần chạy gói Windows `.cmd` mới để cập nhật.
+- Client build hiện tại: `2026.11.26-smb-08`. Máy con đã đăng ký cần chạy gói Windows `.cmd` mới để cập nhật.
 
 ## 9. Cập nhật qua GitHub
 
